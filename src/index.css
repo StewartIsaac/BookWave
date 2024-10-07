@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  background-color: #ffffff;
+  background-image: linear-gradient(#eaffedee 0.6000000000000001px, transparent 0.6000000000000001px), linear-gradient(to right, #eaffedee 0.6000000000000001px, #ffffff 0.6000000000000001px);
+  background-size: 50px 50px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: 'Times New Roman', serif;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
