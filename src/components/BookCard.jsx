@@ -8,6 +8,15 @@ const BookCard = ({ book, onSelect }) => {
     return title;
   };
 
+  const truncateAuthorName = (author, maxLength) => {
+    if (author.length > maxLength) {
+      return author.substring(0, maxLength) + "...";
+    }
+    return author;
+  };
+
+  const authorName = book.author_name ? book.author_name.join(", ") : "Unknown Author";
+
   return (
     <div
       className="w-[300px] p-6 rounded-lg bg-white cursor-pointer shadow-md hover:shadow-2xl mx-auto mb-2"
@@ -15,7 +24,7 @@ const BookCard = ({ book, onSelect }) => {
     >
       <img
         src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-        alt={book.truncateTitle}
+        alt={truncateTitle(book.title, 40)}
         className="mb-2 rounded w-full"
       />
       <div className="relative group">
@@ -25,7 +34,7 @@ const BookCard = ({ book, onSelect }) => {
           {book.title}
         </div>
       </div>
-      <p className="opacity-70 font-medium">{book.author_name ? book.author_name.join(", ") : "Unknown Author"}</p>
+      <p className="opacity-70 font-medium">{truncateAuthorName(authorName, 30)}</p>
     </div>
   );
 };
