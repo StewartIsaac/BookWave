@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import Navbar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import SearchBar from "./components/SearchBar";
 import BookCard from "./components/BookCard";
-import BookDetails from "./components/BookDetails";
 import BookDetailPage from "./components/BookDetailPage";
 import Loader from "./components/Loader";
 import Footer from "./components/Footer";

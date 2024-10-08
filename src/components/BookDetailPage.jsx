@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import BookDetails from "./BookDetails";
-import Navbar from "./NavBar";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 const BookDetailPage = () => {
