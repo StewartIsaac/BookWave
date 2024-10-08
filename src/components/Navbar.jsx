@@ -15,10 +15,12 @@ const Navbar = () => {
   return (
     <nav className="bg-gradient-to-tr from-green-500 to-green-800 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <img className="w-7" src="/logo-w.png" alt="BookWave Logo" />
-          <h1 className="text-white text-2xl font-bold ml-2">BookWave</h1>
-        </div>
+        <Link to="/">
+          <div className="flex items-center">
+            <img className="w-7" src="/logo-w.png" alt="BookWave Logo" />
+            <h1 className="text-white text-2xl font-bold ml-2">BookWave</h1>
+          </div>
+        </Link>
 
         {/* Hamburger Menu Button */}
         <div className="block md:hidden">
