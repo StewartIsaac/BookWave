@@ -70,7 +70,7 @@ const Navbar = () => {
         >
           {/* Logo in mobile menu */}
           <div className="flex flex-col items-center mb-10 md:hidden">
-            <img className="w-10" src="/logo-w.png" alt="BookWave Logo" />
+            <img className="w-15" src="/logo-w.png" alt="BookWave Logo" />
             <h1 className="text-white text-2xl font-bold mt-2">BookWave</h1>
           </div>
 
