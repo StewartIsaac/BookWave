@@ -50,7 +50,7 @@ const App = () => {
   };
 
   return (
-    <div className="bg-transparent">
+    <div className="bg-transparent min-h-full">
       <Navbar />
       <HeroSection />
       <SearchBar onSearch={searchBooks} />
