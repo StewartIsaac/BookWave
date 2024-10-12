@@ -1,8 +1,11 @@
-<img src="./public/logo-g.png" alt="Bookwave Logo" width="50px" /><h1>Bookwave - A Book Library App</h1>
+<div style="display: flex; flex-direction: row; gap: 5px;">
+   <img src="https://github.com/user-attachments/assets/8af3d828-6b2b-455a-a965-fbc9cb357823" alt="Bookwave Logo" style="width: 30px;" />
 
-Welcome to **Bookwave**, a modern web application that allows users to search for books, explore detailed information, and read books online through the Open Library API. This project was built as a part of my Frontend Web Development Capstone.
+   <h1>Bookwave - A Book Library App</h1>
+</div>
 
-![Bookwave Logo](./public/logo-g.png)
+Welcome to **Bookwave**, a modern web application that allows users to search for books, explore detailed information, and read books online through the Open Library API. This project was built as a part of my ALX Frontend (FE) Web Development Capstone.
+
 
 <h2>Table of Contents</h2>
 
@@ -31,8 +34,15 @@ Welcome to **Bookwave**, a modern web application that allows users to search fo
 
 <h2 id="tech-stack">Tech Stack</h2>
 
-- **Frontend**: React.js, Tailwind CSS
-- **Build Tool**: Vite
+- **Frontend**:
+  <div style="display: flex; flex-direction: row; gap: 5px;">
+     <img src="https://github.com/user-attachments/assets/306800ef-c7f3-402a-9d59-3df2ac5a4d83" alt="React.js Logo" style="width: 25px;" />
+     <img src="https://github.com/user-attachments/assets/f15a2862-9ce7-4e0a-a338-af70ce782b86" alt="Tailwind CSS Logo" style="width: 25px;" />
+  </div>
+- **Build Tool**:
+  <div style="display: flex; flex-direction: row; gap: 5px;">
+      <img src="https://github.com/user-attachments/assets/656384b8-08e8-4664-96f5-0f4778aa8c80" alt="Vite Logo" style="width: 25px;" />
+  </div>
 - **API**: <a href="https://openlibrary.org/developers/api" target="_blank">Open Library API</a>
 - **Deployment**: Vercel
 
