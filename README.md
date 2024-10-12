@@ -18,6 +18,7 @@ Welcome to **Bookwave**, a modern web application that allows users to search fo
 - [API](#api)
 - [Challenges](#challenges)
 - [Learnings](#key-learnings)
+- [License](#licence)
 
 <h2 id="overview">Overview</h2>
 
@@ -105,3 +106,7 @@ For more details, visit the <a href="https://openlibrary.org/developers/api" tar
 - **API Integration**: Working with the Open Library API provided valuable experience in handling external APIs, data fetching, and error management.
 - **React Best Practices**: I enhanced my understanding of component-based architecture, React Router, and state management.
 - **Handling API Failures**: The project taught me how to implement robust error handling to ensure a smooth user experience, even when the API is down.
+
+<h2 id="license">License</h2>
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
