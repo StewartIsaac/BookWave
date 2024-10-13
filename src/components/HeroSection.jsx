@@ -4,7 +4,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="text-center pt-24 pb-4 px-4"
+      className="text-center pt-24 pb-6 px-4"
     >
       <div className="container mx-auto">
         <img className="w-14 mx-auto md:w-20" src="/logo-g.png" />
