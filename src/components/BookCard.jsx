@@ -1,40 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { toast } from "react-toastify";
 
-const BookCard = ({ book, onSelect }) => {
-  const truncateTitle = (title, maxLength) => {
-    if (title.length > maxLength) {
-      return title.substring(0, maxLength) + "...";
+const BookCard = ({ book, onSelect, onRemoveBook }) => {
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    const savedBooks = JSON.parse(localStorage.getItem("savedBooks")) || [];
+    setIsSaved(savedBooks.some((savedBook) => savedBook.id === book.id));
+  }, [book.id]);
+
+  const handleSaveBook = () => {
+    const savedBooks = JSON.parse(localStorage.getItem("savedBooks")) || [];
+    if (!isSaved) {
+      savedBooks.push(book);
+      localStorage.setItem("savedBooks", JSON.stringify(savedBooks));
+      toast.success(`${book.volumeInfo?.title || "Book"} saved to My Books!`);
+    } else {
+      const updatedBooks = savedBooks.filter((savedBook) => savedBook.id !== book.id);
+      localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
+      toast.error(`${book.volumeInfo?.title || "Book"} removed from My Books.`);
     }
-    return title;
+    setIsSaved(!isSaved);
   };
 
-  const truncateAuthorName = (author, maxLength) => {
-    if (author.length > maxLength) {
-      return author.substring(0, maxLength) + "...";
-    }
-    return author;
-  };
+  const truncateTitle = (title, maxLength) =>
+    title.length > maxLength ? title.slice(0, maxLength) + "..." : title;
 
-  const authorName = book.author_name ? book.author_name.join(", ") : "Unknown Author";
+  const authors = book.volumeInfo?.authors
+    ? book.volumeInfo.authors.join(", ")
+    : "Unknown Author";
+
+  const thumbnail = book.volumeInfo?.imageLinks?.thumbnail || "default-image.jpg";
 
   return (
-    <div
-      className="w-[300px] p-6 rounded-lg bg-white cursor-pointer shadow-md hover:shadow-2xl mx-auto mb-2"
-      onClick={onSelect}
-    >
+    <div className="w-[300px] p-6 rounded-lg bg-white cursor-pointer shadow-md hover:shadow-2xl mx-auto mb-4 relative">
+      {/* Book Image */}
       <img
-        src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-        alt={truncateTitle(book.title, 40)}
+        src={thumbnail}
+        alt={truncateTitle(book.volumeInfo?.title || "No Title", 40)}
         className="mb-2 rounded w-full"
+        onClick={onSelect}
       />
-      <div className="relative group">
-        <h3 className="font-bold text-2xl font-sans">{truncateTitle(book.title, 40)}</h3>
 
-        <div className="absolute opacity-0 w-[300px] group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-white text-gray-700 p-2 rounded-md shadow-2xl border border-green-200 top-full left-1/2 transform -translate-x-1/3 z-10 whitespace-wrap">
-          {book.title}
-        </div>
-      </div>
-      <p className="opacity-70 font-medium">{truncateAuthorName(authorName, 30)}</p>
+      {/* Save Button */}
+      <button
+        className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-lg backdrop-blur-lg"
+        onClick={handleSaveBook}
+      >
+        {isSaved ? (
+          <FaBookmark className="text-red-600 w-5 h-5" />
+        ) : (
+          <FaRegBookmark className="text-gray-600 w-5 h-5" />
+        )}
+      </button>
+
+      {/* Book Title and Authors */}
+      <h3 className="font-bold text-2xl">
+        {truncateTitle(book.volumeInfo?.title || "No Title", 40)}
+      </h3>
+      <p className="opacity-70 font-medium">{truncateTitle(authors, 30)}</p>
+
+      {/* Remove Button */}
+      {onRemoveBook && (
+        <button
+          onClick={onRemoveBook}
+          className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        >
+          Remove
+        </button>
+      )}
     </div>
   );
 };
