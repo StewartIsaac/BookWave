@@ -5,53 +5,73 @@ import HeroSection from "./components/HeroSection";
 import SearchBar from "./components/SearchBar";
 import BookCard from "./components/BookCard";
 import BookDetailPage from "./components/BookDetailPage";
-import Loader from "./components/Loader";
+import MyBooksPage from "./components/MyBooksPage";
 import Footer from "./components/Footer";
 import ContactPage from "./components/ContactPage";
 import AboutPage from "./components/AboutPage";
+import Loader from "./components/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [books, setBooks] = useState([]);
+  const [savedBooks, setSavedBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedBooks = sessionStorage.getItem('books');
+    const storedSavedBooks = sessionStorage.getItem('savedBooks');
+
     if (storedBooks) {
       setBooks(JSON.parse(storedBooks)); // Load books from sessionStorage
     }
+    if (storedSavedBooks) {
+      setSavedBooks(JSON.parse(storedSavedBooks)); // Load saved books from sessionStorage
+    }
   }, []);
+
+  const api_key = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
 
   const searchBooks = async (query) => {
     setLoading(true);
     setError("");
     try {
       const response = await fetch(
-        `https://openlibrary.org/search.json?q=${query}`
+        `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${api_key}`
       );
       const data = await response.json();
-      if (data.docs.length > 0) {
-        setBooks(data.docs);
-        sessionStorage.setItem('books', JSON.stringify(data.docs));
+      if (data.items && data.items.length > 0) {
+        setBooks(data.items);
+        sessionStorage.setItem('books', JSON.stringify(data.items));
       } else {
         setError("No books found. Try another query.");
       }
     } catch (error) {
-      setError("Error fetching data.");
+      setError("Error fetching data. Try again!");
     }
     setLoading(false);
   };
 
+  const saveBook = (book) => {
+    const updatedSavedBooks = savedBooks.includes(book.id)
+      ? savedBooks.filter(id => id !== book.id) // Remove book if already saved
+      : [...savedBooks, book.id]; // Add book if not saved
+
+    setSavedBooks(updatedSavedBooks);
+    sessionStorage.setItem('savedBooks', JSON.stringify(updatedSavedBooks));
+  };
+
   const handleBookSelect = (book) => {
-    // Navigate to book details route with the selected book's state
-    const bookId = book.key.replace("/works/", "");
+    const bookId = book.id;
     navigate(`/books/${bookId}`, { state: { book } });
   };
 
   return (
     <div className="bg-transparent min-h-full">
       <Navbar />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
       <HeroSection />
       <SearchBar onSearch={searchBooks} />
       {loading && <Loader />}
@@ -60,9 +80,11 @@ const App = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {books.map((book) => (
             <BookCard
-              key={book.key}
+              key={book.id}
               book={book}
               onSelect={() => handleBookSelect(book)}
+              onSave={() => saveBook(book)}
+              isSaved={savedBooks.includes(book.id)} // Check if the book is saved
             />
           ))}
         </div>
@@ -73,11 +95,15 @@ const App = () => {
 };
 
 const MainApp = () => {
+  const [books, setBooks] = useState([]);
+  const [savedBooks, setSavedBooks] = useState([]);
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/books/:bookId" element={<BookDetailPage />} />
+        <Route path="/my-books" element={<MyBooksPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>

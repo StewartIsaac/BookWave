@@ -77,17 +77,22 @@ const Navbar = () => {
           {/* Navigation Links */}
           <ul className="flex flex-col space-y-8 text-white text-center md:flex-row md:space-x-6 md:space-y-0">
             <li>
-              <Link to="/" className="text-xl font-sans hover:font-bold" onClick={closeMenu}>
+              <Link to="/" className="text-xl font-sans hover:opacity-70" onClick={closeMenu}>
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/about" className="text-xl font-sans hover:font-bold" onClick={closeMenu}>
+              <Link to="/my-books" className="text-xl font-sans hover:opacity-70" onClick={closeMenu}>
+                My Books
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="text-xl font-sans hover:opacity-70" onClick={closeMenu}>
                 About
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="text-xl font-sans hover:font-bold" onClick={closeMenu}>
+              <Link to="/contact" className="text-xl font-sans hover:opacity-70" onClick={closeMenu}>
                 Contact
               </Link>
             </li>
