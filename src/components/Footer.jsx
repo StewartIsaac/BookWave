@@ -3,11 +3,11 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="absolute inset-x-0 bottom-0  w-full bg-gradient-to-tl from-green-500 to-green-700 text-white p-4">
-      <div className="container flex flex-col items-center justify-center mx-auto md:flex-row md:justify-between">
+    <footer className="w-full bg-gradient-to-tl from-green-500 to-green-700 text-white p-4">
+      <div className="container flex flex-col items-center justify-center inset-x-0 bottom-0 mx-auto md:flex-row md:justify-between">
         <div>
           <p className="text-center">
-            &copy; {new Date().getFullYear()} Book Library. All rights reserved.
+            &copy; {new Date().getFullYear()} BookWave. All rights reserved.
           </p>
         </div>
 
