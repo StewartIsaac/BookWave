@@ -24,11 +24,15 @@ const Navbar = () => {
 
         {/* Hamburger Menu Button */}
         <div className="block md:hidden">
-          <button onClick={toggleMenu} className="text-white focus:outline-none z-50 relative">
+          <button
+            onClick={toggleMenu}
+            className="text-white focus:outline-none z-50 relative"
+            aria-expanded={isOpen} // Accessibility enhancement
+            aria-label="Toggle navigation menu" // Accessibility enhancement
+          >
             {isOpen ? (
-              // X icon for closing menu (updated visibility and styling)
               <svg
-                className="w-8 h-8 text-white z-50" // Ensure z-index is higher to make the icon appear above the menu
+                className="w-8 h-8 text-white z-50"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -42,7 +46,6 @@ const Navbar = () => {
                 />
               </svg>
             ) : (
-              // Hamburger icon for opening menu
               <svg
                 className="w-8 h-8 text-white"
                 fill="none"
@@ -64,7 +67,7 @@ const Navbar = () => {
         {/* Navigation Links */}
         <div
           className={`${isOpen
-            ? "fixed inset-0 bg-gradient-to-bl from-green-500 to-green-700 h-screen flex flex-col items-center justify-center z-40" // Added z-index to the background
+            ? "fixed inset-0 bg-gradient-to-bl from-green-500 to-green-700 h-screen flex flex-col items-center justify-center z-40"
             : "hidden md:flex"
             }`}
         >
